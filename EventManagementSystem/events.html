@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav>
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+        <a href="events.html">Events</a>
+    </nav>
+    <h1>Upcoming Events</h1>
+    <input type="text" id="search" placeholder="Search events">
+    <ul id="event-list"></ul>
+    <script>
+        function loadEvents(query = '') {
+            fetch(`/api/search?query=${query}`)
+                .then(response => response.json())
+                .then(events => {
+                    const list = document.getElementById('event-list');
+                    list.innerHTML = '';
+                    events.forEach(event => {
+                        list.innerHTML += `<li>${event.name} - ${event.date} <button onclick="registerEvent('${event.id}')">Register</button></li>`;
+                    });
+                });
+        }
+        loadEvents();
+        function registerEvent(eventId) {
+            fetch(`/api/register?eventId=${eventId}`, { method: 'POST' })
+                .then(response => alert('Registration successful!'));
+        }
+        document.getElementById('search').addEventListener('input', (e) => loadEvents(e.target.value));
+    </script>
+</body>
+
+</html>

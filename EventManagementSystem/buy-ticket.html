@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy Ticket</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav>
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+        <a href="events.html">Events</a>
+    </nav>
+    <h1>Buy Ticket</h1>
+    <form action="/buy-ticket" method="POST">
+        <input type="hidden" name="eventId" value="event123">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
+        <button type="submit">Purchase</button>
+    </form>
+</body>
+</html>
